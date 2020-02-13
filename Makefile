@@ -12,3 +12,5 @@ provinces:
 
 update-index:
 	tree -H 'output' -L 1 --noreport --charset utf-8  ./output/ > outputs.html
+
+all: fetch-data plots update-index

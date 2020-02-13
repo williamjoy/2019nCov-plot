@@ -67,7 +67,7 @@ with open(FILE_NAME, newline='',  encoding='utf-8-sig') as csvfile:
         print(geo_location, max(points.values()))
         plt.scatter(points.keys(),
                     points.values(),
-                    label=geo_location,
+                    label=f'{geo_location}: {max(points.values())}',
                     marker='o')
 ax.legend(loc='upper left', prop=prop)
 ax.grid(True)
