@@ -11,4 +11,4 @@ provinces:
 	tail -n +2 DXYArea.csv|cut -d, -f 1|sort -u |xargs -n1 -I '{}' python3 main.py --province '{}' --save-file 'output/{}'
 
 update-index:
-	tree -H 'output' -L 1 --noreport --charset utf-8  ./output/ > index.html
+	tree -H 'output' -L 1 --noreport --charset utf-8  ./output/ > outputs.html
