@@ -36,15 +36,18 @@ ax.set(xlim=(0, (datetime.now().replace(hour=0, minute=0) -
 with open(FILE_NAME, newline='',  encoding='utf-8-sig') as csvfile:
     reader = csv.DictReader(csvfile)
     if args.province:
+        title = args.province
         value_key = 'city_confirmedCount'
         name_key = 'cityName'
         data = list(filter(lambda x:  x.get(
             'provinceName', "").startswith(args.province), reader))
     else:
+        title = '全国'
         value_key = 'province_confirmedCount'
         name_key = 'provinceName'
         data = reader
 
+    plt.ylabel(f'{title} confirmed cases', fontproperties=prop)
     data_by_geo = {}
     for row in data:
         geo_location = row.get(name_key, "None")
@@ -65,13 +68,13 @@ with open(FILE_NAME, newline='',  encoding='utf-8-sig') as csvfile:
         if not points:
             continue
         print(geo_location, max(points.values()))
+        print(points.keys(), points.values())
         plt.scatter(points.keys(),
                     points.values(),
-                    label=f'{geo_location}: {max(points.values())}',
-                    marker='o')
+                    label=f'{geo_location}: {max(points.values())}')
 ax.legend(loc='upper left', prop=prop)
 ax.grid(True)
-#plt.figure(figsize=(1920,1080))
+plt.title('confirmed cases')
 if args.save_file:
     plt.savefig(f'{args.save_file}.svg', format='svg')
 else:
