@@ -76,6 +76,6 @@ ax.legend(loc='upper left', prop=prop)
 ax.grid(True)
 plt.title('confirmed cases')
 if args.save_file:
-    plt.savefig(f'{args.save_file}.svg', format='svg')
+    plt.savefig(f'{args.save_file}.svg', format='svg',)
 else:
     plt.show()
