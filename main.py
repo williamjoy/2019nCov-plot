@@ -17,7 +17,7 @@ import matplotlib
 random.seed(6878748400691668451)
 MAKERS = ['.', ',', 'o', 'v', '^', '<', '>', 's', 'p',
           '*', 'h', 'H', '+', 'D', 'd', '|', '_', 'P', 'X']
-LINESTYLES= ['-', '--', '-.', ':']
+LINESTYLES = ['-', '--', '-.', ':']
 
 matplotlib.rcParams['figure.figsize'] = (15.0, 10.0)
 FONT_FILE = '/System/Library/Fonts/STHeiti Light.ttc'
@@ -38,8 +38,8 @@ black_list_re = re.compile(args.exclude) if args.exclude else None
 
 plt.xlabel(f'day from {TIME_ZERO}', fontproperties=prop)
 
-ax.set(xlim=(0, (datetime.now().replace(hour=0, minute=0) -
-                 TIME_ZERO).total_seconds()/3600/24 + 2))
+#ax.set(xlim=(0, (datetime.now().replace(hour=0, minute=0) -
+#                 TIME_ZERO).total_seconds()/3600/24 + 2))
 with open(FILE_NAME, newline='',  encoding='utf-8-sig') as csvfile:
     reader = csv.DictReader(csvfile)
     if args.province:
@@ -68,22 +68,23 @@ with open(FILE_NAME, newline='',  encoding='utf-8-sig') as csvfile:
         data_by_geo.setdefault(geo_location, {})
 
         # truncate to day
-        if data_by_geo.get(geo_location).get(day_diff, 0) < value:
-            data_by_geo[geo_location][day_diff] = value
+        # if data_by_geo.get(geo_location).get(day_diff, 0) < value:
+        #    data_by_geo[geo_location][day_diff] = value
+        data_by_geo[geo_location][updateTime] = value
 
     for geo_location, points in data_by_geo.items():
         if not points:
             continue
         print(geo_location, max(points.values()))
-        print(points.keys(), points.values())
-        plt.plot(np.array(list(points.keys())),
-                 np.array(list(points.values())),
-                 marker=random.choice(MAKERS),
-                 linestyle=random.choice(LINESTYLES),
-                 label=f'{geo_location}: {max(points.values())}')
+        plt.plot_date(list(points.keys()),
+                      list(points.values()),
+                      marker=random.choice(MAKERS),
+                      linestyle=random.choice(LINESTYLES),
+                      label=f'{geo_location}: {max(points.values())}')
 ax.legend(loc='upper left', prop=prop)
 ax.grid(True)
 plt.title('confirmed cases')
+plt.gcf().autofmt_xdate()
 if args.save_file:
     plt.savefig(f'{args.save_file}.svg', format='svg',)
 else:
