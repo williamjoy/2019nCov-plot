@@ -1,4 +1,5 @@
 import csv
+import random
 import numpy as np
 
 from datetime import datetime
@@ -12,10 +13,16 @@ import argparse
 import re
 
 import matplotlib
+
+random.seed(6878748400691668451)
+MAKERS = ['.', ',', 'o', 'v', '^', '<', '>', 's', 'p',
+          '*', 'h', 'H', '+', 'D', 'd', '|', '_', 'P', 'X']
+LINESTYLES= ['-', '--', '-.', ':']
+
 matplotlib.rcParams['figure.figsize'] = (15.0, 10.0)
 FONT_FILE = '/System/Library/Fonts/STHeiti Light.ttc'
 prop = mfm.FontProperties(fname=FONT_FILE)
-#prop.set_size('small')
+# prop.set_size('small')
 
 TIME_ZERO = datetime.fromisoformat('2020-01-24')
 FILE_NAME = "./hubei.csv"
@@ -69,9 +76,11 @@ with open(FILE_NAME, newline='',  encoding='utf-8-sig') as csvfile:
             continue
         print(geo_location, max(points.values()))
         print(points.keys(), points.values())
-        plt.scatter(points.keys(),
-                    points.values(),
-                    label=f'{geo_location}: {max(points.values())}')
+        plt.plot(np.array(list(points.keys())),
+                 np.array(list(points.values())),
+                 marker=random.choice(MAKERS),
+                 linestyle=random.choice(LINESTYLES),
+                 label=f'{geo_location}: {max(points.values())}')
 ax.legend(loc='upper left', prop=prop)
 ax.grid(True)
 plt.title('confirmed cases')
