@@ -19,16 +19,15 @@ MAKERS = ['.', ',', 'o', 'v', '^', '<', '>', 's', 'p',
           '*', 'h', 'H', '+', 'D', 'd', '|', '_', 'P', 'X']
 LINESTYLES = ['-', '--', '-.', ':']
 
-matplotlib.rcParams['figure.figsize'] = (15.0, 10.0)
+matplotlib.rcParams['figure.figsize'] = (20.0, 12.0)
 FONT_FILE = '/System/Library/Fonts/STHeiti Light.ttc'
 prop = mfm.FontProperties(fname=FONT_FILE)
 # prop.set_size('small')
 
-TIME_ZERO = datetime.fromisoformat('2020-01-24')
 FILE_NAME = "./hubei.csv"
 FILE_NAME = "./DXYArea.csv"
 _, ax = plt.subplots()
-
+ax.yaxis.tick_right()
 parser = argparse.ArgumentParser(description='Plot 2019nCov Confirmed cases')
 parser.add_argument('--province', help='province name')
 parser.add_argument('--save-file', help='file name to save')
@@ -36,10 +35,8 @@ parser.add_argument('--exclude', help='exclude data, regular expression')
 args = parser.parse_args()
 black_list_re = re.compile(args.exclude) if args.exclude else None
 
-plt.xlabel(f'day from {TIME_ZERO}', fontproperties=prop)
+plt.xlabel(f'Date', fontproperties=prop)
 
-#ax.set(xlim=(0, (datetime.now().replace(hour=0, minute=0) -
-#                 TIME_ZERO).total_seconds()/3600/24 + 2))
 with open(FILE_NAME, newline='',  encoding='utf-8-sig') as csvfile:
     reader = csv.DictReader(csvfile)
     if args.province:
@@ -62,14 +59,8 @@ with open(FILE_NAME, newline='',  encoding='utf-8-sig') as csvfile:
             continue
         value = int(row.get(value_key, 0))
         updateTime = datetime.fromisoformat(row.get('updateTime'))
-        day_diff = (updateTime.replace(hour=0, minute=0, second=0,
-                                       microsecond=0) - TIME_ZERO).total_seconds()/3600/24
 
         data_by_geo.setdefault(geo_location, {})
-
-        # truncate to day
-        # if data_by_geo.get(geo_location).get(day_diff, 0) < value:
-        #    data_by_geo[geo_location][day_diff] = value
         data_by_geo[geo_location][updateTime] = value
 
     for geo_location, points in data_by_geo.items():
