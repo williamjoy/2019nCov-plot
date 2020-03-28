@@ -51,9 +51,9 @@ with open(FILE_NAME, newline='') as csvfile:
             continue
         value = int(row.get(value_key, 0))
         updateTime = datetime.strptime(row.get('date'), '%d-%m-%Y')
-
-        data_by_geo.setdefault(geo_location, {})
-        data_by_geo[geo_location][updateTime] = value
+        if updateTime > datetime.strptime('01-03-2020', '%d-%m-%Y'):
+            data_by_geo.setdefault(geo_location, {})
+            data_by_geo[geo_location][updateTime] = value
 
     for geo_location, points in data_by_geo.items():
         if not points:
