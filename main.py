@@ -29,6 +29,7 @@ FILE_NAME = "./DXYArea.csv"
 _, ax = plt.subplots()
 ax.yaxis.tick_right()
 parser = argparse.ArgumentParser(description='Plot 2019nCov Confirmed cases')
+parser.add_argument('--country', help='country name')
 parser.add_argument('--province', help='province name')
 parser.add_argument('--save-file', help='file name to save')
 parser.add_argument('--exclude', help='exclude data, regular expression')
