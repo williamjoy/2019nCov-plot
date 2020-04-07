@@ -16,3 +16,6 @@ update-index:
 	tree -H 'output' -L 1 --noreport --charset utf-8  ./output/ > outputs.html
 
 all: fetch-data others update-index
+
+open-github-page:
+	open https://williamjoy.github.io/2019nCov-plot/output/Canada.svg

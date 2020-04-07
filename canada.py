@@ -15,8 +15,8 @@ import re
 import matplotlib
 
 random.seed(6878748400691668451)
-MAKERS = ['.', ',', 'o', 'v', '^', '<', '>', 's', 'p',
-          '*', 'h', 'H', '+', 'D', 'd', '|', '_', 'P', 'X']
+MARKERS = ['.', 'o', 'v', '^', '<', '>', 's', 'p',
+          '*', 'h', 'H', '+', 'D', 'd', 'P', 'X']
 LINESTYLES = ['-', '--', '-.', ':']
 
 matplotlib.rcParams['figure.figsize'] = (20.0, 12.0)
@@ -58,10 +58,11 @@ with open(FILE_NAME, newline='') as csvfile:
     for geo_location, points in data_by_geo.items():
         if not points:
             continue
-        print(geo_location, max(points.values()))
+        marker = random.choice(MARKERS)
+        print(marker, geo_location, max(points.values()))
         plt.plot_date(list(points.keys()),
                       list(points.values()),
-                      marker=random.choice(MAKERS),
+                      marker=marker,
                       linestyle=random.choice(LINESTYLES),
                       label=f'{geo_location}: {max(points.values())}')
 ax.legend(loc='upper left', prop=prop)
