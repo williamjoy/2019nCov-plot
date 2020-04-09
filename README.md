@@ -2,7 +2,7 @@
 
 ## About
 
-Render scatter plot pictures from 2019nCov data, source from https://github.com/BlankerL/DXY-COVID-19-Data
+CoVid-19 number of cases in Canada. Data are from https://health-infobase.canada.ca
 
 ## Rendered SVG Files
 
@@ -10,4 +10,4 @@ Render scatter plot pictures from 2019nCov data, source from https://github.com/
 
 ## Example
 
-![Confirmed cases in Hubei (excluding Wuhan)](https://williamjoy.github.io/2019nCov-plot/output/Hubei-Excluding-Wuhan.svg)
+![Daily new cases in Canada](https://williamjoy.github.io/2019nCov-plot/output/Canada_Daily_New_Cases.svg)
