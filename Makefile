@@ -11,6 +11,7 @@ others:
 	python3 canada.py  --save-file 'output/Canada_Confirmed_Cases' --title 'Canada Confirmed Cases'
 	python3 canada.py  --save-file 'output/Canada_Daily_New_Cases' --value-column numtoday --title 'Canada Daily New Cases'
 	python3 canada.py  --save-file 'output/Canada_Tested_Cases' --value-column numtested --title 'Canada Tested Cases'
+	python3 canada.py  --save-file 'output/Canada_Total_Cases' --value-column numtotal --title 'Canada Total Cases'
 provinces:
 	tail -n +2 DXYArea.csv|cut -d, -f 1|sort -u |xargs -n1 -I '{}' python3 main.py --province '{}' --save-file 'output/{}'
 
