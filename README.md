@@ -4,7 +4,7 @@
 
 CoVid-19 number of cases in Canada. Data are from https://health-infobase.canada.ca
 
-Cached CSV table: https://github.com/williamjoy/2019nCov-plot/blob/master/canada.csv
+Cached CSV table: [canada.csv](https://github.com/williamjoy/2019nCov-plot/blob/master/canada.csv)
 
 ## Rendered SVG Files
 
