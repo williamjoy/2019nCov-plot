@@ -8,6 +8,8 @@ others:
 	#python3 main.py  --exclude 湖北 --save-file 'output/China-Excluding-Hubei'
 	#python3 main.py  --exclude 武汉 --province 湖北 --save-file 'output/Hubei-Excluding-Wuhan'
 	#python3 main.py  --save-file 'output/China'
+	python3 canada.py  --save-file 'output/BC_Confirmed_Cases' --title 'Canada BC Confirmed Cases' --whitelist British
+	python3 canada.py  --save-file 'output/BC_Daily_New_Cases' --value-column numtoday --title 'Canada BC Daily New Cases' --whitelist British
 	python3 canada.py  --save-file 'output/Canada_Confirmed_Cases' --title 'Canada Confirmed Cases'
 	python3 canada.py  --save-file 'output/Canada_Daily_New_Cases' --value-column numtoday --title 'Canada Daily New Cases'
 	python3 canada.py  --save-file 'output/Canada_Tested_Cases' --value-column numtested --title 'Canada Tested Cases'

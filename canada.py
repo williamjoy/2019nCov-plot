@@ -30,11 +30,13 @@ ax.yaxis.tick_right()
 parser = argparse.ArgumentParser(description='Plot 2019nCov Confirmed cases')
 parser.add_argument('--value-column', help='project on column name, default: numconf', default='numconf')
 parser.add_argument('--save-file', help='file name to save')
-parser.add_argument('--exclude', help='exclude data, regular expression')
+parser.add_argument('--blacklist', help='blacklist data, regular expression')
+parser.add_argument('--whitelist', help='whitelist data, regular expression')
 parser.add_argument('--title', help='graph title', default='Confirmed Cases')
 args = parser.parse_args()
 print (args)
-black_list_re = re.compile(args.exclude) if args.exclude else None
+blacklist_re = re.compile(args.blacklist) if args.blacklist else None
+whitelist_re = re.compile(args.whitelist) if args.whitelist else None
 
 plt.xlabel(f'Date', fontproperties=prop)
 
@@ -49,7 +51,10 @@ with open(FILE_NAME, newline='') as csvfile:
     data_by_geo = {}
     for row in data:
         geo_location = row.get(name_key, "None")
-        if black_list_re and black_list_re.findall(geo_location):
+        if blacklist_re and blacklist_re.findall(geo_location):
+            continue
+        if whitelist_re and  not whitelist_re.findall(geo_location):
+            print(geo_location, whitelist_re)
             continue
         try:
             value = int(row.get(value_key, 0))
