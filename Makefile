@@ -1,6 +1,7 @@
 fetch-data:
 	#http https://raw.githubusercontent.com/BlankerL/DXY-COVID-19-Data/master/csv/DXYArea.csv --output DXYArea.csv
 	http https://health-infobase.canada.ca/src/data/covidLive/covid19.csv --output canada.csv
+	dos2unix canada.csv
 
 plots: others provinces
 
