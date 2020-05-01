@@ -24,4 +24,4 @@ update-index:
 all: fetch-data others update-index
 
 open-github-page:
-	open https://williamjoy.github.io/2019nCov-plot/output/Canada.svg
+	open https://williamjoy.github.io/2019nCov-plot/output/Canada_Confirmed_Cases.svg
